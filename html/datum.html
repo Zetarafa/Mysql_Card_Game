@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datum</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="datum">
+    <div class="container">
+        <h1>In welchem Zeitraum soll das Projekt stattfinden?</h1>  
+    </div>     
+    <div class="time-selector">
+        <label for="start-date" class="date-label">von</label>
+        <div class="date-selector">
+            <img src="../images/marble1.png" alt="Start Date Sphere" class="sphere">
+            <input type="date" id="start-date" class="date-input">            
+        </div>
+        <label for="end-date" class="date-label">bis</label>
+        <div class="date-selector">
+            <img src="../images/marble2.png" alt="End Date Sphere" class="sphere">
+            <input type="date" id="end-date" class="date-input"> 
+        </div>
+    </div>
+    <script>
+        function switchToGeneral() {
+            localStorage.removeItem('selectedStartDate');
+            localStorage.removeItem('selectedEndDate');
+            location.href = './zeitraum.html';
+        }
+    </script>
+     <div class="alternative-button">
+        <button class="button" onclick="location.href='./zeitraum.html'">ALLGEMEINEN ZEITRAUM STATTDESSEN ANGEBEN</button>
+    </div>
+    <div class="container-button">
+        <button class="right-button" onclick="handleWeiter()">
+            WEITER
+        </button>
+    </div>
+    <div class="summary">
+        <div class="selected-cards" id="selected-cards"></div>  
+    </div> 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const selectedContainer = document.querySelector(".selected-cards");
+
+    if (!selectedContainer) {
+        console.error("Error: The mini-card container was not found.");
+        return;
+    }
+
+    // 🔹 Retrieve all previously selected cards from storage
+    let selectedCardsPlatform = JSON.parse(localStorage.getItem("selectedCardsPlatform")) || [];
+    let selectedCardsNewOld = JSON.parse(localStorage.getItem("selectedCardsNewOld")) || [];
+    let selectedCardsGegner = JSON.parse(localStorage.getItem("selectedCardsGegner")) || [];
+    let selectedCardsWorkers = JSON.parse(localStorage.getItem("selectedCardsWorkers")) || [];
+
+    let allSelectedCards = [...selectedCardsPlatform, ...selectedCardsNewOld, ...selectedCardsGegner, ...selectedCardsWorkers];
+
+    /** 🔹 Function to update the display of mini-cards */
+    function updateSelectedCards() {
+        selectedContainer.innerHTML = ""; // Clear before updating
+
+        allSelectedCards.forEach((card, index) => {
+            const miniCard = document.createElement("div");
+            miniCard.classList.add("mini-card");
+            miniCard.style.backgroundImage = `url(${card.artwork})`;
+
+            // 🔹 Arrange in a fan layout
+            const offset = index * 8;
+            miniCard.style.transform = `translate(${offset - 30}px, 10px) rotate(${offset / 15}deg)`;
+
+            // 🔹 Click to remove the mini-card
+            miniCard.addEventListener("click", function () {
+                removeCard(card.id);
+            });
+
+            selectedContainer.appendChild(miniCard);
+        });
+    }
+
+    /** 🔹 Function to remove a card from selection */
+    function removeCard(cardId) {
+        selectedCardsPlatform = selectedCardsPlatform.filter(c => c.id !== cardId);
+        selectedCardsNewOld = selectedCardsNewOld.filter(c => c.id !== cardId);
+        selectedCardsGegner = selectedCardsGegner.filter(c => c.id !== cardId);
+        selectedCardsWorkers = selectedCardsWorkers.filter(c => c.id !== cardId);
+
+        // 🔹 Save updated selections in localStorage
+        localStorage.setItem("selectedCardsPlatform", JSON.stringify(selectedCardsPlatform));
+        localStorage.setItem("selectedCardsNewOld", JSON.stringify(selectedCardsNewOld));
+        localStorage.setItem("selectedCardsGegner", JSON.stringify(selectedCardsGegner));
+        localStorage.setItem("selectedCardsWorkers", JSON.stringify(selectedCardsWorkers));
+
+        allSelectedCards = [...selectedCardsPlatform, ...selectedCardsNewOld, ...selectedCardsGegner, ...selectedCardsWorkers];
+
+        updateSelectedCards();
+    }
+
+    // 🔹 Display the mini-cards when the page loads
+    updateSelectedCards();
+});
+
+
+    </script>        
+    
+    <script src="../js/clear-selection.js"></script>
+    <script src="../js/datum.js"></script>
+</body>
+</html>

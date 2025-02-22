@@ -1,0 +1,634 @@
+* {
+  /*border: solid 1.5px white;*/
+  font-family: "Latin Modern Roman";
+  font-style: italic;
+}
+body {
+  background: url("../images/HG.png") no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(4px);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  margin-top: -10%;
+}
+
+.container h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.container p {
+  font-size: 1.8rem;
+  color: white;
+}
+
+/*------------Button Container---------------*/
+.container-button {
+  position: relative;
+  margin: 0;
+  padding: 1px;
+  background-image: url("../images/button_line.png"),
+    url("../images/button_line.png");
+  background-position: calc(50% - 250px) center, calc(50% + 250px) center;
+  background-repeat: no-repeat, no-repeat;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  height: 165px;
+}
+#button {
+  padding: 0;
+  margin-bottom: 0px;
+  width: 157px;
+  height: 157px;
+  background: url("../images/button.png") no-repeat center;
+  background-size: cover;
+  transform: scale(0.6);
+  cursor: pointer;
+  border: none;
+}
+.button-label {
+  padding: 0;
+  font-size: 15px;
+  color: gold;
+}
+#button:hover {
+  transform: scale(0.5);
+}
+.left-button {
+  cursor: pointer;
+  background-color: transparent;
+  color: gold;
+  border: none;
+  font-size: 30px;
+  transition: transform 0.3s ease;
+  position: absolute;
+  top: 50px;
+  left: 20%;
+}
+
+.left-button:hover {
+  transform: scale(1.1);
+}
+.right-button {
+  cursor: pointer;
+  background-color: transparent;
+  color: gold;
+  border: none;
+  font-size: 30px;
+  transition: transform 0.3s ease;
+  position: absolute;
+  top: 50px;
+  right: 20%;
+}
+.right-button:hover {
+  transform: scale(1.1);
+}
+/*-----------------------Cards-----------------*/
+.cards-container {
+  display: flex;
+  justify-content: space-around;
+  overflow-x: auto;  
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: 160px;
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px; 
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  overflow: hidden;
+}
+.selected {
+  opacity: 0.5; /* Dim selected cards */
+  transform: scale(0.85); /* Shrink effect */
+  border: 2px solid gold;
+}
+
+.mini-card {
+  width: 100px;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+
+
+.selected-cards {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping to a new row */
+  justify-content: center;
+  align-items: center;
+  height: auto; /* Allow dynamic height based on content */
+  max-height: 28rem; /* Optional: Limit height if necessary */
+  gap: 2px; /* Space between cards */
+  padding: 0;
+  overflow-y: auto; /* Enable scrolling if content exceeds max height */
+  margin-top: 4rem;
+}
+
+
+/*----------------Cards-Content------------------------*/
+
+.card .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card .header img {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.card .header h2 {
+  margin: 0;
+  font-size: 1.4em;
+}
+
+.header h2 {
+  text-align: left;
+  line-height: 0.8; /* Adjust the space between lines */
+}
+
+.centered {
+  display: block;
+  text-align: center;
+}
+
+.card .abilities img {
+  width: 30px;
+  height: 30px;
+  margin-right: 2px;
+}
+
+.card .description {
+  font-size: 0.7em;
+  margin-bottom: 15px;
+}
+
+.card .stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card .stats .attribute {
+  text-align: center;
+}
+
+.card .stats .attribute span {
+  font-size: 0.5em;
+  color: #ccc;
+}
+
+/*-------------------------------Zeitraum-----------------------------------------------*/
+
+.time-selector {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  color: #fff;
+  height: 300px;
+}
+.year-selector, .month-selector {
+  display: flex;
+  flex-direction: row; /* Displays items in a row */
+  align-items: center; 
+  text-align: center;
+  color: #fff;
+}
+.sphere {
+  width: 180px;
+  height: 180px;
+}
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.arrow-up, .arrow-down {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+.value {
+  display: block;
+  font-size: 36px;
+  margin: 0;
+  position: relative;
+}
+.value::after {
+  content: '';
+  display: block;
+  width: 100%; 
+  height: 2px;
+  background-color: #fff;
+  margin: 3px auto;
+  position: absolute;
+}
+.label {
+  font-size: 18px;
+  color: #fff;
+  margin-left: 10px; /* Space for label */
+}
+.alternative p {
+  margin-top: 50px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+.navigation-buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.alternative-button {
+  margin: 5px auto;
+  text-align: center;
+  border-radius: 10px;
+}
+.button {
+  cursor: pointer;
+  background-color: transparent;
+  color: gold;
+  border: none;
+  font-size: 25px;
+  transition: transform 0.3s ease;
+  text-align: center;
+} 
+.button:hover {
+  transform: scale(1.1);
+}
+
+/*---------------------------Datum-------------------------------------------*/
+.date-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 350px;
+}
+.date-label {
+  font-weight: gold;
+  font-size: 1.8rem;
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
+.date-input {
+  padding: 5px;
+  margin: 0 10px;
+  font-size: 1.5rem;
+  width: 150px;
+  background-color: transparent;
+  color:white;
+}
+.date-input input {
+  padding: 3px;
+  font-size: 1.4rem
+}
+/*-----------------Card Worker Flip-------------------*/
+/* 🔹 Flip Container */
+.flip-container {
+  perspective: 1000px;
+  width: 160px;
+  height: 220px;
+}
+
+/* 🔹 Inner Flip Structure */
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* 🔹 Card Flips on Hover */
+.flip-container:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* 🔹 Front and Back of the Card */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  backface-visibility: hidden;
+}
+
+/* 🔹 Back Side is Initially Hidden */
+.card-back {
+  transform: rotateY(180deg);
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  text-align: center;
+}
+
+
+/*-----------------------Summary--------------------------------*/
+
+.time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  font-size: 2.0rem;
+  color: white;
+  width: 50%; 
+}
+
+.time h3 {
+  color: white;
+  font-size: 1.5em;       
+  font-weight: bold; 
+}
+
+.summary{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+}
+.sphere2 {
+  width: 180px;
+  height: 180px;
+  background: url('../images/marble2.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.duration-subtitle a {
+  font-size: 1.3rem;
+  color: white; 
+  text-align: center;
+  font-weight: bold;
+  justify-content: center;
+  text-decoration: none;
+  margin-left: 2rem;
+}
+
+
+/*----------------------E-mail---------------------------------------*/
+.email-container {
+  width: 100%;
+  height: 30rem;
+  text-align: center;
+  background: url("../images/textfeld.png") no-repeat center center / cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "name email"
+    "message message";
+  grid-gap: 18%; /* Relative space between elements */
+  width: 80%;
+  max-width: 750px;
+  position: relative;
+  margin: 0 auto;
+  top: 13%;
+  transform: translateY(-50%);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%; 
+  border: none;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  background: rgb(255, 255, 255, 0.1);
+}
+
+.form-group textarea {
+  resize: none;
+  height: 12rem; 
+}
+
+/* Style scrollbar WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/*------------Button Container Email---------------*/
+.container-button-email {
+  position: relative;
+  margin: 0;
+  padding: 15px;
+  background-image: url("../images/button_line.png"),
+    url("../images/button_line.png");
+  background-position: calc(50% - 250px) center, calc(50% + 250px) center;
+  background-repeat: no-repeat, no-repeat;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: space-between;
+  width: 700px;
+  height: 165px;
+  margin-bottom: -20rem;
+}
+
+#button:hover {
+  transform: scale(0.5);
+}
+/* -----------------Media Query ------------------------*/
+
+@media (max-width: 768px) {
+  .container h1 {
+    font-size: 2.6rem;
+  }
+
+  .container p {
+    font-size: 1.6rem;
+  }
+
+  .card {
+    width: 120px;
+    height: 210px;
+  }
+  
+  .container-button {
+    background-image:none;
+  }
+
+  .left-button {
+    top: 20px;
+    left: 10%;
+  }
+
+  .right-button {
+    top: 20px;
+    right: 10%;
+  }
+
+  .email-container {
+    background: none;
+
+  }
+
+  #contact-form {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "name"
+      "email"
+      "message";
+    grid-gap: 2rem;
+  }
+
+  .form-group textarea {
+    height: 150px;
+  }
+
+  .time-selector {    
+    gap: 0px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  body {
+    justify-content: space-around;    
+  }
+
+  .container {
+    margin-top: -5%;
+  } 
+
+  .container h1 {
+    font-size: 1.8em;
+  }
+
+  .container p {
+    font-size: 1.2em;
+  }
+
+  .card {
+    width: 100px;
+    height: 150px;
+  }
+
+  .mini-card {
+    width: 50px;
+    height: 110px;
+  }
+
+  .container-button {
+    background-image:none;
+    height: 150px;
+  }
+
+  #button {
+    transform: scale(0.8);
+  }
+
+  .left-button {
+    top: 10px;
+    left: 5px;
+  }
+
+  .right-button {
+    top: 10px;
+    right: 5px;
+  }
+
+  .email-container {
+    background: none;
+
+  }
+
+  #contact-form {
+    width: 90%;
+    margin-right: 2%;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.5rem;
+  }
+
+  .form-group textarea {
+    height: 120px;
+  }
+
+  .sphere2 {
+    background: none; 
+      
+  }
+  .time-selector {    
+    gap: 0px;    
+  }
+
+  .date-label {
+    font-size: 1.2rem;
+    margin-top: 8px;
+    color: white;
+  }
+
+  .date-input {
+    margin: 0 1px;
+  }
+
+}

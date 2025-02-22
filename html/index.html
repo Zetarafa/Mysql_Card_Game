@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interaktive Projektzusammenstellung</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script>
+      window.addEventListener("load", () => {
+        localStorage.clear();
+      });
+    </script>
+    <script src="../js/load_cards.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Interaktive Projektzusammenstellung</h1>
+      <p>Stelle dein Projekt auf...mit einem Kartendeck!</p>
+    </div>
+    <div class="container-button">
+      <button class="left-button" onclick="location.href='https://qm-interactive.com/'">ZURÜCK</button>
+      <a href="./selectedCardsPlatform.html" id="button"></a>
+      <span class="button-label">START</span>
+    </div>
+    <div class="cards-container" id="cards-container"></div> <!-- Cards will load here -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    fetch("get_cardsw.php") 
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("cards-container");
+            container.innerHTML = ""; 
+
+            data.forEach(card => {
+                const cardElement = document.createElement("div");
+                cardElement.classList.add("card");
+                cardElement.innerHTML = `
+                    
+                        <div class="card" style="background-image: url('${card.artwork}')">
+                            <div class="header">
+                                <h2>${card.name}</h2>
+                            </div>
+                            <div class="description">${card.description}</div>
+                            <div class="attribute">
+                                ${card.strength} <br> <span>Force</span>
+                            </div>
+                            <div class="attribute">
+                                ⚡ ${card.energy_cost} <br> <span>Cost</span>
+                            </div>
+                        </div>
+                    
+                `;
+                container.appendChild(cardElement);
+            });
+        })
+        .catch(error => console.error("Fehler beim Laden der Karten:", error));
+});
+
+      </script>
+    
+    
+  </body>
+</html>
