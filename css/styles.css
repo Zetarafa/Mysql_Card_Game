@@ -424,8 +424,8 @@ body {
 
 #contact-form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
+  grid-template-columns: 20rem 10rem;
+  grid-template-rows: 2rem 18         rem;
   grid-template-areas:
     "name email"
     "message message";
@@ -434,22 +434,25 @@ body {
   max-width: 750px;
   position: relative;
   margin: 0 auto;
-  top: 13%;
+  top: 6rem;
   transform: translateY(-50%);
 }
 
-.form-group input,
-.form-group textarea {
-  width: 100%; 
+.form-group input {
   border: none;
   border-radius: 4px;
   font-size: 1.5rem;
   background: rgb(255, 255, 255, 0.1);
+
 }
 
 .form-group textarea {
-  resize: none;
-  height: 12rem; 
+  width: 80%; 
+  border: none;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  background: rgb(255, 255, 255, 0.1);
+  height: 15rem; 
 }
 
 /* Style scrollbar WebKit (Chrome, Safari, Edge) */
